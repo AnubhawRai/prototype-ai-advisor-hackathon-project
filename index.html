@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synapster - AI Career Intelligence Platform | Prototype Showcase</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #1a202c;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .mockup-screen {
+            background: linear-gradient(145deg, #f7fafc 0%, #edf2f7 100%);
+            border: 8px solid #2d3748;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.1);
+            border-color: #667eea;
+        }
+        
+        .demo-interface {
+            background: #1a202c;
+            color: white;
+            border-radius: 8px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .skill-tag-demo {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin: 2px;
+            font-size: 12px;
+        }
+        
+        .prototype-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 3rem 0;
+        }
+        
+        .tech-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .animate-slideIn {
+            animation: slideIn 0.8s ease-out;
+        }
+        
+        .progress-demo {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 8px;
+            border-radius: 4px;
+            transition: width 2s ease;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center mr-3">
+                        <i class="fas fa-brain text-white text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold gradient-text">Synapster</span>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#features" class="text-gray-600 hover:text-blue-600">Features</a>
+                    <a href="#demo" class="text-gray-600 hover:text-blue-600">Demo</a>
+                    <a href="#architecture" class="text-gray-600 hover:text-blue-600">Architecture</a>
+                    <a href="#prototype" class="text-gray-600 hover:text-blue-600">Prototype</a>
+                </nav>
+                <button class="gradient-bg text-white px-6 py-2 rounded-lg font-semibold">
+                    Get Started
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="prototype-section gradient-bg text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+            <div class="animate-slideIn">
+                <h1 class="text-5xl lg:text-7xl font-bold mb-6">
+                    AI-Powered<br>
+                    <span class="text-yellow-300">Career Intelligence</span>
+                </h1>
+                <p class="text-xl mb-8 text-blue-100">
+                    Revolutionary platform that analyzes your skills, predicts career paths, and creates personalized roadmaps using advanced neural networks and machine learning algorithms.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button class="bg-white text-blue-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100">
+                        <i class="fas fa-play mr-2"></i>
+                        Live Demo
+                    </button>
+                    <button class="border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-blue-600">
+                        View Prototype
+                    </button>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="mockup-screen p-6 bg-white text-gray-800">
+                    <div class="flex items-center mb-4">
+                        <div class="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
+                        <div class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
+                        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                        <div class="ml-4 text-sm text-gray-500">synapster.ai</div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="h-8 bg-gradient-to-r from-blue-400 to-purple-500 rounded w-3/4"></div>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div class="h-20 bg-blue-100 rounded"></div>
+                            <div class="h-20 bg-purple-100 rounded"></div>
+                            <div class="h-20 bg-green-100 rounded"></div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="h-4 bg-gray-200 rounded w-full"></div>
+                            <div class="h-4 bg-gray-200 rounded w-5/6"></div>
+                            <div class="h-4 bg-gray-200 rounded w-4/6"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features -->
+    <section id="features" class="prototype-section bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold gradient-text mb-4">Revolutionary Features</h2>
+                <p class="text-xl text-gray-600">Cutting-edge AI technology meets career development</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="feature-card bg-white rounded-xl p-8 shadow-lg">
+                    <div class="tech-icon gradient-bg mb-6">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Neural Skill Analysis</h3>
+                    <p class="text-gray-600 mb-6">Advanced AI algorithms analyze your skill profile and identify patterns that traditional assessments miss.</p>
+                    <div class="space-y-2">
+                        <div class="skill-tag-demo">JavaScript</div>
+                        <div class="skill-tag-demo">Machine Learning</div>
+                        <div class="skill-tag-demo">React</div>
+                        <div class="skill-tag-demo">Python</div>
+                    </div>
+                </div>
+                
+                <div class="feature-card bg-white rounded-xl p-8 shadow-lg">
+                    <div class="tech-icon bg-green-500 mb-6">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Dynamic Roadmaps</h3>
+                    <p class="text-gray-600 mb-6">Personalized learning paths that adapt in real-time based on your progress and market trends.</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-green-500 rounded-full mr-3"></div>
+                            <span class="text-sm">Foundation Complete</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-blue-500 rounded-full mr-3 animate-pulse"></div>
+                            <span class="text-sm">Advanced Skills</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-gray-300 rounded-full mr-3"></div>
+                            <span class="text-sm">Specialization</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-card bg-white rounded-xl p-8 shadow-lg">
+                    <div class="tech-icon bg-purple-500 mb-6">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Career Predictions</h3>
+                    <p class="text-gray-600 mb-6">AI-powered forecasting engine predicts salary ranges, job opportunities, and career growth potential.</p>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span>Job Match</span>
+                            <span class="font-bold text-green-600">87%</span>
+                        </div>
+                        <div class="progress-demo" style="width: 87%;"></div>
+                        <div class="text-lg font-bold text-green-600">$95K - $140K</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Demo -->
+    <section id="demo" class="prototype-section bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold gradient-text mb-4">Interactive Demo</h2>
+                <p class="text-xl text-gray-600">Experience the power of AI-driven career analysis</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="mockup-screen p-8">
+                    <div class="demo-interface">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-terminal text-green-400 mr-2"></i>
+                            <span class="text-green-400">synapster@ai:~$ </span>
+                            <span class="animate-pulse">analyze_skills</span>
+                        </div>
+                        <div class="text-blue-300 mb-2">Initializing neural analysis...</div>
+                        <div class="text-yellow-300 mb-2">Processing skill vectors...</div>
+                        <div class="text-green-300 mb-4">Analysis complete!</div>
+                        
+                        <div class="bg-gray-800 p-4 rounded">
+                            <div class="text-white font-bold mb-2">Career Match Results:</div>
+                            <div class="space-y-1 text-sm">
+                                <div class="flex justify-between">
+                                    <span>Full Stack Developer</span>
+                                    <span class="text-green-400">91%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Data Scientist</span>
+                                    <span class="text-blue-400">84%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>ML Engineer</span>
+                                    <span class="text-purple-400">78%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">Real-time Analysis</h3>
+                        <p class="text-gray-600 mb-4">Our AI engine processes multiple data points simultaneously:</p>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span>Skill proficiency mapping</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span>Market demand analysis</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span>Salary range predictions</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span>Growth trajectory modeling</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="skillAnalysisChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Overview -->
+    <section id="architecture" class="prototype-section bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold gradient-text mb-4">Technical Architecture</h2>
+                <p class="text-xl text-gray-600">Built with modern web technologies and AI frameworks</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="tech-icon bg-orange-500">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Frontend</h3>
+                    <p class="text-gray-600 text-sm">HTML5, CSS3, JavaScript ES6+, Tailwind CSS</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="tech-icon bg-blue-500">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Visualization</h3>
+                    <p class="text-gray-600 text-sm">Chart.js, Three.js, D3.js integrations</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="tech-icon bg-green-500">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">AI Engine</h3>
+                    <p class="text-gray-600 text-sm">Neural networks, ML algorithms, predictive models</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="tech-icon bg-purple-500">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Data Layer</h3>
+                    <p class="text-gray-600 text-sm">Real-time processing, skill databases, market trends</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 bg-gray-50 rounded-xl p-8">
+                <h3 class="text-2xl font-bold mb-6 text-center">Data Flow Architecture</h3>
+                <div class="flex flex-wrap justify-center items-center gap-4">
+                    <div class="bg-white p-4 rounded-lg shadow">User Input</div>
+                    <i class="fas fa-arrow-right text-gray-400"></i>
+                    <div class="bg-blue-100 p-4 rounded-lg shadow">Skill Analysis</div>
+                    <i class="fas fa-arrow-right text-gray-400"></i>
+                    <div class="bg-purple-100 p-4 rounded-lg shadow">AI Processing</div>
+                    <i class="fas fa-arrow-right text-gray-400"></i>
+                    <div class="bg-green-100 p-4 rounded-lg shadow">Career Recommendations</div>
+                    <i class="fas fa-arrow-right text-gray-400"></i>
+                    <div class="bg-yellow-100 p-4 rounded-lg shadow">Dynamic Roadmap</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prototype Showcase -->
+    <section id="prototype" class="prototype-section bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-white mb-4">
+                    Live <span class="text-yellow-400">Prototype</span>
+                </h2>
+                <p class="text-xl text-gray-300">Fully functional demonstration of core features</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="glass rounded-xl p-8">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-user-graduate text-4xl text-blue-400 mb-4"></i>
+                        <h3 class="text-2xl font-bold">Skill Assessment</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <div class="text-sm text-gray-400 mb-2">Current Skills</div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag-demo">JavaScript</span>
+                                <span class="skill-tag-demo">React</span>
+                                <span class="skill-tag-demo">Python</span>
+                                <span class="skill-tag-demo">SQL</span>
+                            </div>
+                        </div>
+                        <button class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700">
+                            Add More Skills
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="glass rounded-xl p-8">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-bullseye text-4xl text-green-400 mb-4"></i>
+                        <h3 class="text-2xl font-bold">Career Matching</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold">Full Stack Developer</span>
+                                <span class="text-green-400 font-bold">91%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-green-400 h-2 rounded-full" style="width: 91%;"></div>
+                            </div>
+                            <div class="text-sm text-gray-400 mt-2">$85K - $120K</div>
+                        </div>
+                        <button class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="glass rounded-xl p-8">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-map-marked-alt text-4xl text-purple-400 mb-4"></i>
+                        <h3 class="text-2xl font-bold">Learning Roadmap</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 bg-green-500 rounded-full mr-3"></div>
+                                    <span class="text-sm">HTML/CSS/JS</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 bg-blue-500 rounded-full mr-3 animate-pulse"></div>
+                                    <span class="text-sm">React Framework</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 bg-gray-600 rounded-full mr-3"></div>
+                                    <span class="text-sm">Backend APIs</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700">
+                            Start Learning
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <h3 class="text-3xl font-bold mb-8">Ready to Transform Your Career?</h3>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="bg-white text-gray-900 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100">
+                        <i class="fas fa-rocket mr-2"></i>
+                        Launch Full Platform
+                    </button>
+                    <button class="border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-gray-900">
+                        <i class="fas fa-download mr-2"></i>
+                        Download Prototype
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-4 gap-8">
+                <div class="lg:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-brain text-white text-xl"></i>
+                        </div>
+                        <span class="text-2xl font-bold">Synapster</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Revolutionary AI-powered career intelligence platform that transforms how professionals discover, develop, and advance their careers.
+                    </p>
+                    <div class="flex space-x-4">
+                        <i class="fab fa-github text-gray-400 hover:text-white cursor-pointer"></i>
+                        <i class="fab fa-linkedin text-gray-400 hover:text-white cursor-pointer"></i>
+                        <i class="fab fa-twitter text-gray-400 hover:text-white cursor-pointer"></i>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Product</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Features</a></li>
+                        <li><a href="#" class="hover:text-white">Pricing</a></li>
+                        <li><a href="#" class="hover:text-white">API</a></li>
+                        <li><a href="#" class="hover:text-white">Documentation</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">About</a></li>
+                        <li><a href="#" class="hover:text-white">Blog</a></li>
+                        <li><a href="#" class="hover:text-white">Careers</a></li>
+                        <li><a href="#" class="hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Synapster. All rights reserved. Prototype showcase version.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize skill analysis chart
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('skillAnalysisChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Technical Skills', 'Problem Solving', 'Communication', 'Leadership', 'Creativity', 'Analytics'],
+                    datasets: [{
+                        label: 'Current Level',
+                        data: [85, 78, 65, 45, 70, 88],
+                        backgroundColor: 'rgba(102, 126, 234, 0.2)',
+                        borderColor: 'rgba(102, 126, 234, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(102, 126, 234, 1)',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2
+                    }, {
+                        label: 'Target Level',
+                        data: [95, 85, 80, 75, 85, 92],
+                        backgroundColor: 'rgba(118, 75, 162, 0.2)',
+                        borderColor: 'rgba(118, 75, 162, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(118, 75, 162, 1)',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#374151'
+                            }
+                        }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                color: '#6B7280'
+                            },
+                            grid: {
+                                color: '#E5E7EB'
+                            },
+                            pointLabels: {
+                                color: '#374151'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add interactive demo functionality
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Add subtle click animation
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 100);
+            });
+        });
+
+        
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = entry.target.querySelectorAll('.progress-demo');
+                    progressBars.forEach(bar => {
+                        bar.style.transition = 'width 2s ease';
+                    });
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
